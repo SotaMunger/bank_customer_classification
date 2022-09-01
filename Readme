@@ -1,0 +1,5 @@
+Using customer demographic information, this model classifies the customer by employment sector, i.e. public, private, or nonemployed.
+
+Because the bank is headquartered and operates in Turkey, the feature headings (demographic designations) and categories are written in Turkish.  
+Translations for the headings and categories are as follows:
+
