@@ -1,7 +1,32 @@
-Using customer demographic information and credit card transaction data, this model classifies the customer by employment sector, i.e. public, private, or nonemployed.
+Using customer demographic information and credit card transaction data, this model attempts to classify the account holder's by employment sector, i.e. public, private, or nonemployed.
 
-Because the bank is headquartered and operates in Turkey, the feature headings (demographic designations) and categories are written in Turkish.  
-Translations for the headings and categories are as follows:
+The data set is proprietary and cannot be shared in this repository.
+
+Because the bank is headquartered and operates in Turkey, some feature headings (demographic designations) and feature categories are written in Turkish.  
+Translations (Derived partly from Google Translate) for those headings and categories are as follows:
+
+Customer Segment Categories:
+BIREYSEL - Individual
+BIREBIR - One to One
+MİKRO - Micro
+EXI26 - Exi26
+ÖZEL BANKACILIK MÜŞTERİLERİ - Private Banking
+
+Marital Status Categories:
+EVLI - Married
+BILINMIYOR - Unknown
+BEKAR - Single
+DUL - Widowed
+BOSANMIS - Divorced
+
+Education Level Categories:	
+LISE - High school
+ORTAOKUL - Elementary
+UNIVERSITE - University
+ILKOKUL - Primary school
+BILINMIYOR - Unknown
+LISASUSTU - Graduate school
+YUKSEKOKUL - College (Junior)
 
 Delinquency Status Headings:
 RISKSIZ - Good standing
@@ -12,3 +37,35 @@ GECIKME 60+ GUN - Late 60+ days
 TAKIP - Referred to collection agency
 
 Spending Categories:
+SAGLIK - Health
+NAKİT AVANS	- Cash Advance
+DİĞER	- Other
+RESTORAN	- Restaurant
+TEKSTİL	- Textile
+AYAKKABI	- Shoes
+TEKNOLOJİ	- Technology
+SİGORTA-MAIL ORDER - Insurance-Mail Order
+BEYAZ EŞYA - Household Appliances
+HİZMET SEKTÖRLERİ	- Service Sector
+HAVAYOLLARI	- Airlines
+ALIŞVERİŞ MERKEZLERİ - Shopping Malls
+AKARYAKIT - Liquid Fuel
+KUYUMCU - Jewelry
+MUZIK MARKET KIRTASİYE - Music Market Stationery
+MOBİLYA, DEKORASYON - Furniture, Decoration
+KOZMETİK - Cosmetics
+YAPI MALZ., HIRDAVAT, NALBURİYE - Building Materials, Hardware, Hardware
+SPOR GİYİM - Sportswear
+OPTİK - Optical
+İÇKİLİ YERLER, KUMARHANE - Bars, Casinos
+SİNEMA TİYATRO SANAT - Cinema, Theater, Art
+ARABA KİRALAMA - Car Rental
+HOTEL - Hotels
+SİGORTA - Insurance
+OTOMOTİV - Automotive
+EĞİTİM - Education
+EĞLENCE VE SPOR - Entertainment And Sports
+OYUNCAK - Toys
+MOTOSİKLET - Motorcycle
+DOĞRUDAN PAZARLAMA-MAIL ORDER - Direct Marketing-Mail Order
+
