@@ -44,7 +44,7 @@ The categories 'DİĞER', 'TANIMSIZ', and 'YURTDIŞINDA ÇALIŞAN' were later dr
 
 ![Screenshot from 2023-04-27 22-04-16](https://user-images.githubusercontent.com/91567553/235196577-fe98f444-2273-4251-9aea-c94ec6ded78f.png)
 
-Next, the credit card transaction data set, which consisted of 9,335,625 unique transactions and features customer ID (Cust_ID), spending category (Category), and transaction amount (Trans_Amt) collected for each transaction, was re-engineered.  Transactions were grouped by customer ID and spending category and aggregated by the sum of the transaction amounts.  A pivot table was then created that displayed the amount each customer ID (rows) spent in each category (columns).  There were 25 spending categories in all (see the Spending Categories translation section in the addendum for the full list).  The transaction pivot table was then incorporated into the demographic data set by joining on customer ID.  The final data set contained the following features:
+Next, the credit card transaction data set, which consisted of 9,335,625 unique transactions and features customer ID (Cust_ID), spending category (Category), and transaction amount (Trans_Amt) collected for each transaction, was re-engineered.  Transactions were grouped by customer ID and spending category and aggregated by the sum of the transaction amounts.  A pivot table was then created that displayed the amount each customer ID (rows) spent in each category (columns).  There were 35 spending categories in all (see the Spending Categories translation section in the addendum for the full list).  The transaction pivot table was then incorporated into the demographic data set by joining on customer ID.  The final data set contained the following features:
 
 ![image](https://user-images.githubusercontent.com/91567553/235198069-90b50bcd-bdcb-4297-92db-1a31401cf06c.png)
 
@@ -57,6 +57,7 @@ Histograms created for each of the spending categories revealed that, in every c
 ![image](https://user-images.githubusercontent.com/91567553/235198763-ded57a7b-d696-4ed1-a519-fa8c0591830f.png)
 
 **Data Processing**
+
 The data set was split into training and test sets at an 80/20 ratio using the StratifiedShuffleSplit class, which preserves the ratio of the employment categories in the training and test sets.  The 'Job_Status' column was split off from the data set and treated as the label.
 
 A data processing pipeline was then built which included an imputer (sklearn.impute.SimpleImputer) to fill in any remaining null values with the median value of the column, a StandardScaler (sklearn.preprocessing.StandardScaler) to standardize all numerical values so that each entry in a column is converted to a z-score centered at mean 0, and categorical encoder (sklearn.preprocessing.OneHotEncoder) to convert categorical values into dummy variables in a sparse matrix.  The training set was then processed through the pipeline.
@@ -75,72 +76,92 @@ Each model was then trained on the entire training set, using the hyperparameter
 
 **Testing**
 
-The test sets were then run through the data processing pipeline and tested in each ensemble model. Performance was even across the board, with all models scoring 88% in accuracy.  The bagging classifier, however, was much less likely to predict that customers were public sector employees or unemployed, and instead favored the private sector category.  Both gradient boost and Adabost were much more likely to predict that customers worked in the public sector or were unemployed.
+The test sets were then run through the data processing pipeline and tested in each ensemble model. Performance was even across the board, with all models scoring 88% in accuracy.  The bagging classifier, however, was much less likely to predict that customers were public sector employees or unemployed, and instead favored the private sector category.  Both gradient boost and Adabost were much more likely to predict that customers worked in the public sector or were unemployed.  The confusion matrices are presented below:
+
+Bagging Classifier
+
+![image](https://user-images.githubusercontent.com/91567553/235217472-f7089388-02f1-43c4-b45b-015516720176.png)
+
+Adaboost Classifier
+
+![image](https://user-images.githubusercontent.com/91567553/235217588-82e10a0e-8b36-4508-ab07-3bae8d9f444c.png)
+
+Gradient boost Classifier
+
+![image](https://user-images.githubusercontent.com/91567553/235217685-d719f330-c0fe-4957-a1bd-6937ce763450.png)
 
 **Addendum**
 
 Because the bank that shared its dataset is headquartered and operates in Turkey, some feature headings (demographic designations) and feature categories are written in Turkish.  Translations (Derived partly from Google Translate) for those headings and categories are as follows:
 
 Customer Segment Categories:
-BIREYSEL - Individual
-BIREBIR - One to One
-MİKRO - Micro
-EXI26 - Exi26
-ÖZEL BANKACILIK MÜŞTERİLERİ - Private Banking
+
+1. BIREYSEL - Individual
+2. BIREBIR - One to One
+3. MİKRO - Micro
+4. EXI26 - Exi26
+5. ÖZEL BANKACILIK MÜŞTERİLERİ - Private Banking
 
 Marital Status Categories:
-EVLI - Married
-BILINMIYOR - Unknown
-BEKAR - Single
-DUL - Widowed
-BOSANMIS - Divorced
 
-Education Level Categories:	
-LISE - High school
-ORTAOKUL - Elementary
-UNIVERSITE - University
-ILKOKUL - Primary school
-BILINMIYOR - Unknown
-LISASUSTU - Graduate school
-YUKSEKOKUL - College (Junior)
+1. EVLI - Married
+2. BEKAR - Single
+3. DUL - Widowed
+4. BOSANMIS - Divorced
+5. BILINMIYOR - Unknown
+
+Education Level Categories:
+
+1. ORTAOKUL - Elementary
+2. ILKOKUL - Primary school
+3. LISE - High school
+4. YUKSEKOKUL - College (Junior)
+5. UNIVERSITE - University
+6. LISASUSTU - Graduate school
+7. BILINMIYOR - Unknown
 
 Delinquency Status Headings:
-RISKSIZ - Good standing
-GECIKME 1-15 GUN - Late 1-15 days
-GECIKME 16-29 GUN - Late 16-29 days
-GECIKME 30-59 GUN - Late 30-59 days
-GECIKME 60+ GUN - Late 60+ days
-TAKIP - Referred to collection agency
+
+1. RISKSIZ - Good standing
+2. GECIKME 1-15 GUN - Late 1-15 days
+3. GECIKME 16-29 GUN - Late 16-29 days
+4. GECIKME 30-59 GUN - Late 30-59 days
+5. GECIKME 60+ GUN - Late 60+ days
+6. TAKIP - Referred to collection agency
 
 Spending Categories:
-SAGLIK - Health
-NAKİT AVANS	- Cash Advance
-DİĞER	- Other
-RESTORAN	- Restaurant
-TEKSTİL	- Textile
-AYAKKABI	- Shoes
-TEKNOLOJİ	- Technology
-SİGORTA-MAIL ORDER - Insurance-Mail Order
-BEYAZ EŞYA - Household Appliances
-HİZMET SEKTÖRLERİ	- Service Sector
-HAVAYOLLARI	- Airlines
-ALIŞVERİŞ MERKEZLERİ - Shopping Malls
-AKARYAKIT - Liquid Fuel
-KUYUMCU - Jewelry
-MUZIK MARKET KIRTASİYE - Music Market Stationery
-MOBİLYA, DEKORASYON - Furniture, Decoration
-KOZMETİK - Cosmetics
-YAPI MALZ., HIRDAVAT, NALBURİYE - Building Materials, Hardware, Hardware
-SPOR GİYİM - Sportswear
-OPTİK - Optical
-İÇKİLİ YERLER, KUMARHANE - Bars, Casinos
-SİNEMA TİYATRO SANAT - Cinema, Theater, Art
-ARABA KİRALAMA - Car Rental
-HOTEL - Hotels
-SİGORTA - Insurance
-OTOMOTİV - Automotive
-EĞİTİM - Education
-EĞLENCE VE SPOR - Entertainment And Sports
-OYUNCAK - Toys
-MOTOSİKLET - Motorcycle
-DOĞRUDAN PAZARLAMA-MAIL ORDER - Direct Marketing-Mail Order
+1. AKARYAKIT - Liquid Fuel
+2. ALIŞVERİŞ MERKEZLERİ - Shopping Malls
+3. ARABA KİRALAMA - Car Rental
+4. AYAKKABI - Shoes
+5. BEYAZ EŞYA - Household Appliances
+6. DENİZ TAŞITLARI KİRALAMA - Marine Vehicle Rental
+7. DOĞRUDAN PAZARLAMA-MAIL ORDER - Direct Marketing-Mail Order
+8. DİĞER - Other
+9. EĞLENCE VE SPOR - Entertainment And Sports
+10. EĞİTİM - Education
+11. GIDA - Food
+12. HAVAYOLLARI - Airlines
+13. HOTEL - Hotels
+14. HİZMET SEKTÖRLERİ - Service Sector
+15. İÇKİLİ YERLER, KUMARHANE - Bars, Casinos
+16. KOZMETİK - Cosmetics
+17. KUYUMCU - Jewelry
+18. MOBİLYA, DEKORASYON - Furniture, Decoration
+19. MOTOSİKLET - Motorcycle
+20. MUZIK MARKET KIRTASİYE - Music Market Stationery
+21. NAKİT AVANS - Cash Advance
+22. OPTİK - Optical
+23. OTOMOTİV - Automotive
+24. OYUNCAK - Toys
+25. RESTORAN - Restaurant
+26. SAGLIK - Health
+27. SEYAHAT ACENTALARI - TAŞIMACILIK - Travel Agencies (Transporation)
+28. SPOR GİYİM - Sportswear
+29. SİGORTA - Insurance
+30. SİGORTA-MAIL ORDER - Insurance-Mail Order
+31. SİNEMA TİYATRO SANAT - Cinema, Theater, Art
+32. TEKNOLOJİ - Technology 
+33. TEKSTİL - Textile
+34. TELEKOMÜNİKASYON - Telecommunications
+35. YAPI MALZ., HIRDAVAT, NALBURİYE - Building Materials, Hardware, Hardware
