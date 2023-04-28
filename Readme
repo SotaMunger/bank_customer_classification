@@ -1,4 +1,6 @@
-This end-to-end data science project compares the performance of three ensemble classification models that predict bank customers' employment sectors (public, private, or unemployed) using their demographic data and credit card spending habits. The three models tested here include a bagging classifier, an Adaboost classifier, and a gradient boost classifier (all imported from the sklearn.ensemble class).  All three models use decision trees as their base algorithms.
+## Bank Customer Classification Ensemble Models
+
+This end-to-end data science project compares the performance of three ensemble classification models that predict bank customers' employment sectors (public, private, or unemployed) based on their demographic data and credit card spending habits. The three models tested here include a bagging classifier, an Adaboost classifier, and a gradient boost classifier (from the sklearn.ensemble class).  All three models use decision trees as their base algorithms.
 
 The steps in the project workflow (explained in more detail below) include:
 
@@ -10,29 +12,27 @@ The steps in the project workflow (explained in more detail below) include:
 6. Training
 7. Testing
 
-The data set used in this analysis is proprietary and cannot be shared in this repository.
+The data set used in this analysis, which consists of deidentified customer data from a Turkish bank, is proprietary and cannot be shared in this repository.
 
-<b>Data cleaning and feature engineering<b\>
+**Data cleaning and feature engineering**
 
-After dropping geographical coordinate features for branch, home, and work locations (which were redundant with branch, home, and work region features), the demographic data set consisted of the following features:
+After dropping geographical coordinate columns for branch, home, and work locations (which were redundant with the branch, home, and work region columns), the demographic data set consisted of the following features:
 
 Cust_segment - the type of account the customer held
 Branch_ID - the bank branch number where the customer opened the account
 Gender (binary)
 Marital_Status (see categories in the translation section below)
 Education_lv (see categories in the translation section below)
-Job_Status - employment categories (grouped as private, public, and unemployed for this analysis)
+Job_Status - employment categories (later grouped as private, public, or unemployed for this analysis and used as labels)
 Income - annual earnings
 Age
-Years_w_Bank
-Penalty_ (12 columns) - Credit card payment delinquincy status for each month from July 2014 to June 2015
-Work_Region - geographical region of the customer's workplace
+Years_w_Bank - number of years as a customer
+Penalty_ (12 columns) - credit card payment delinquincy status for each month from July 2014 to June 2015
+Work_Region - geographical region in Turkey of the customer's workplace
 Home_Region - geographical region of the customer's home
 Branch_Region - geographical region of the customer's primary bank branch
 
 The data types are found in the df.info() output below:
-
-file:///home/richard/Pictures/Screenshots/Screenshot%20from%202023-04-26%2020-07-22.png
 
 The penalty columns for each month were first converted to columns consisting of counts for each category i.e. one column for RISKSIZ (Good Standing), one column for GECIKME 1-15 GUN (Late 1-15 days), etc. with counts for the number of times the customer held that status through the 12 month period.  Then, the Job_Status categories were grouped accordingly:
 
