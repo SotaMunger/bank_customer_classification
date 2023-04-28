@@ -12,6 +12,8 @@ The steps in the project workflow (explained in more detail below) include:
 6. Training
 7. Testing
 
+All steps were performed in the main notebook file, Work_class_fulldata-sss-git.ipynb, except for the hyperparameter tuning which was performed on a reduced data set in the bank_customer_identification_tuning.ipynb notebook (see Hyperparameter tuning section below for explanation).
+
 The data set used in this analysis, which consists of deidentified customer data from a Turkish bank, is proprietary and cannot be shared in this repository.
 
 **Data cleaning and feature engineering**
